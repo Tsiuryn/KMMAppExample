@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
 }
 
@@ -10,6 +11,11 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+    }
+
+    repositories {
+        google()
+        mavenCentral()
     }
     
     listOf(
@@ -23,7 +29,11 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
